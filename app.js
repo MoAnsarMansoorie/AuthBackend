@@ -1,3 +1,4 @@
+require("dotenv").config()
 require("./config/database").connect();
 const express = require("express");
 const jwt = require("jsonwebtoken");
@@ -6,9 +7,15 @@ const User = require("./model/user");
 var cookieParser = require('cookie-parser')
 const app = express();
 
+
+// custom middleware
+const auth = require("./middleware/auth")
+
 app.use(express()); //discuss this
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
+
+const SECRET = process.env.SECRET
 
 app.get("/", (req, res) => {
   res.send("Hello world!");
@@ -109,8 +116,17 @@ app.post("/login", async (req, res) => {
   }
 })
 
-app.get("/dashboard", (req, res) => {
-  
+app.get("/dashboard", (req, auth, res) => {
+  res.send("Welcome to DashBoard!")
+})
+
+
+app.get("/profile", (req, auth, res) => {
+  // access to req.user = id, email
+
+  // based on id query to db and get all user information - findOne({id})
+
+  // send the json response with all data
 })
 
 module.exports = app;

@@ -19,7 +19,7 @@ const auth = (req, res, next) => {
     //
   } catch (err) {
     console.log(err);
-    return res.status(401).send("Token is invalid")
+    res.status(401).send("Token is invalid")
   }
 
   return next()
