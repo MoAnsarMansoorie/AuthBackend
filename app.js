@@ -121,7 +121,7 @@ app.get("/dashboard", (req, auth, res) => {
 })
 
 
-app.get("/profile", (req, auth, res) => {
+app.get("/profile", auth, (req, res) => {
   // access to req.user = id, email
 
   // based on id query to db and get all user information - findOne({id})

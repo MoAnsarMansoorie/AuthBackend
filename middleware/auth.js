@@ -2,7 +2,9 @@ const jwt = require("jsonwebtoken")
 
 const auth = (req, res, next) => {
   console.log(req.cookies);
-  const token = req.cookies;
+  const {token} = req.cookies;
+  // Authorization : "Bearer longtokenvalue"
+  // const token : req.header("Authorization").replace("Bearer ", "")
 
   // what if token is not there
   if (!token) {
